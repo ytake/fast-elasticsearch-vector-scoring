@@ -33,4 +33,32 @@ public class VectorScoringScriptEngine implements ScriptEngine {
     	ScoreScript.Factory factory = VectorScoreScript.VectorScoreScriptFactory::new;
         return context.factoryClazz.cast(factory);
     }
+    
+    @Override
+    public Set<ScriptContext<?>> getSupportedContexts() {
+        return Set.of(
+            FieldScript.CONTEXT,
+            TermsSetQueryScript.CONTEXT,
+            NumberSortScript.CONTEXT,
+            StringSortScript.CONTEXT,
+            IngestScript.CONTEXT,
+            AggregationScript.CONTEXT,
+            IngestConditionalScript.CONTEXT,
+            UpdateScript.CONTEXT,
+            BucketAggregationScript.CONTEXT,
+            BucketAggregationSelectorScript.CONTEXT,
+            SignificantTermsHeuristicScoreScript.CONTEXT,
+            TemplateScript.CONTEXT,
+            FilterScript.CONTEXT,
+            SimilarityScript.CONTEXT,
+            SimilarityWeightScript.CONTEXT,
+            MovingFunctionScript.CONTEXT,
+            ScoreScript.CONTEXT,
+            ScriptedMetricAggContexts.InitScript.CONTEXT,
+            ScriptedMetricAggContexts.MapScript.CONTEXT,
+            ScriptedMetricAggContexts.CombineScript.CONTEXT,
+            ScriptedMetricAggContexts.ReduceScript.CONTEXT,
+            IntervalFilterScript.CONTEXT
+        );
+    }
 }
