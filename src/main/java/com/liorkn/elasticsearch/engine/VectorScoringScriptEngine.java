@@ -8,6 +8,27 @@ import org.elasticsearch.script.ScriptContext;
 import org.elasticsearch.script.ScriptEngine;
 import org.elasticsearch.script.ScoreScript;
 
+import org.apache.lucene.index.LeafReaderContext;
+import org.apache.lucene.search.Scorable;
+import org.elasticsearch.index.query.IntervalFilterScript;
+import org.elasticsearch.index.similarity.ScriptedSimilarity.Doc;
+import org.elasticsearch.index.similarity.ScriptedSimilarity.Field;
+import org.elasticsearch.index.similarity.ScriptedSimilarity.Query;
+import org.elasticsearch.index.similarity.ScriptedSimilarity.Term;
+import org.elasticsearch.search.aggregations.pipeline.MovingFunctionScript;
+import org.elasticsearch.search.lookup.LeafSearchLookup;
+import org.elasticsearch.search.lookup.SearchLookup;
+
+import java.io.IOException;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+
+import static java.util.Collections.emptyMap;
+
 /** This {@link ScriptEngine} uses Lucene segment details to implement document scoring based on their similarity with submitted document. */
 public class VectorScoringScriptEngine implements ScriptEngine {
 
